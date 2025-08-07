@@ -1,0 +1,66 @@
+---
+import Layout from '../layouts/BlogPost.astro';
+---
+
+<Layout
+  title="Now"
+  description="What I'm focused on right now. Inspired by Derek Sivers' /now movement."
+  pubDate={new Date()}
+  heroImage="/blog-placeholder-1.jpg"
+>
+  <section style="max-width: 800px; margin: 0 auto; padding: 2em 0;">
+    <h2 style="font-size:2.2em; margin-bottom:0.2em;">What I'm Doing Now</h2>
+    <p style="font-size:1.15em; color:rgb(120,130,150); margin-bottom:2em;">
+      Welcome to my <strong>/now</strong> page—a regularly updated overview of my current priorities, projects, and personal growth. This is where I share what I'm actively working on and what matters most to me at this moment.
+    </p>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 2em;">
+      <div style="flex:1 1 300px; min-width:260px; background: #f6f8fa; border-radius: 12px; padding: 1.5em; box-shadow: 0 2px 8px rgba(120,130,150,0.08);">
+        <h3 style="margin-top:0;">🧑‍💻 Professional</h3>
+        <ul style="margin:0; padding-left:1.2em;">
+          <li>Building and refining modern web applications using Astro, TypeScript, and serverless platforms.</li>
+          <li>Experimenting with AI-driven content generation and automation tools.</li>
+          <li>Contributing to open-source projects and sharing knowledge through blog posts and tutorials.</li>
+        </ul>
+      </div>
+      <div style="flex:1 1 300px; min-width:260px; background: #f6f8fa; border-radius: 12px; padding: 1.5em; box-shadow: 0 2px 8px rgba(120,130,150,0.08);">
+        <h3 style="margin-top:0;">📚 Learning</h3>
+        <ul style="margin:0; padding-left:1.2em;">
+          <li>Deepening my understanding of large language models and prompt engineering.</li>
+          <li>Exploring advanced CSS, UI/UX design systems, and accessibility best practices.</li>
+          <li>Reading books on creativity, productivity, and the future of technology.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 2em; margin-top:2em;">
+      <div style="flex:1 1 300px; min-width:260px; background: #f6f8fa; border-radius: 12px; padding: 1.5em; box-shadow: 0 2px 8px rgba(120,130,150,0.08);">
+        <h3 style="margin-top:0;">🛠️ Projects</h3>
+        <ul style="margin:0; padding-left:1.2em;">
+          <li>Launching new features for this blog, including interactive guides and code playgrounds.</li>
+          <li>Developing a personal knowledge base using markdown and static site generators.</li>
+          <li>Collaborating with peers on innovative side projects in AI and automation.</li>
+        </ul>
+      </div>
+      <div style="flex:1 1 300px; min-width:260px; background: #f6f8fa; border-radius: 12px; padding: 1.5em; box-shadow: 0 2px 8px rgba(120,130,150,0.08);">
+        <h3 style="margin-top:0;">🌱 Personal</h3>
+        <ul style="margin:0; padding-left:1.2em;">
+          <li>Prioritizing health, mindfulness, and work-life balance.</li>
+          <li>Spending time outdoors, hiking, and exploring new places.</li>
+          <li>Connecting with friends, family, and the creative community.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top:2.5em; padding:1.5em; background: #eaf1fb; border-radius: 10px; text-align:center;">
+      <h3 style="margin-top:0;">💡 Now Page Philosophy</h3>
+      <p style="font-size:1.08em; max-width:600px; margin:0 auto;">
+        This page is inspired by <a href="https://nownownow.com/about" target="_blank" rel="noopener">Derek Sivers' /now movement</a>—a way to share what truly matters to you, beyond the typical resume or social feed. It’s a commitment to transparency, focus, and intentional living.
+      </p>
+    </div>
+
+    <footer style="margin-top:2.5em; text-align:center; color:rgb(120,130,150); font-size:0.98em;">
+      Last updated: {new Date().toLocaleDateString()}
+    </footer>
+  </section>
+</Layout>
