@@ -5,16 +5,18 @@
  */
 
 :root {
-  --accent: #2337ff;
-  --accent-dark: #000d8a;
-  --black: 15, 18, 25;
-  --gray: 96, 115, 159;
-  --gray-light: 229, 233, 240;
-  --gray-dark: 34, 41, 57;
-  --gray-gradient: rgba(var(--gray-light), 50%), #fff;
+  --accent: #4f8cff;
+  --accent-dark: #1a3a6b;
+  --black: 20, 23, 33;
+  --gray: 120, 130, 150;
+  --gray-light: 240, 243, 250;
+  --gray-dark: 40, 48, 65;
+  --gray-gradient: rgba(var(--gray-light), 70%), #fff;
   --box-shadow:
-    0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
-    0 16px 32px rgba(var(--gray), 33%);
+    0 2px 8px rgba(var(--gray), 0.10),
+    0 8px 32px rgba(var(--gray), 0.12);
+  --radius: 14px;
+  --transition: 0.18s cubic-bezier(.4,0,.2,1);
 }
 @font-face {
   font-family: "Atkinson";
@@ -31,7 +33,7 @@
   font-display: swap;
 }
 body {
-  font-family: "Atkinson", sans-serif;
+  font-family: "Atkinson", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
   margin: 0;
   padding: 0;
   text-align: left;
@@ -41,13 +43,17 @@ body {
   overflow-wrap: break-word;
   color: rgb(var(--gray-dark));
   font-size: 20px;
-  line-height: 1.7;
+  line-height: 1.8;
+  letter-spacing: 0.01em;
+  min-height: 100vh;
+  transition: background var(--transition);
 }
 main {
   width: 720px;
   max-width: calc(100% - 2em);
   margin: auto;
   padding: 3em 1em;
+  transition: box-shadow var(--transition);
 }
 h1,
 h2,
@@ -55,24 +61,26 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 0.6em 0;
   color: rgb(var(--black));
-  line-height: 1.2;
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 h1 {
-  font-size: 3.052em;
+  font-size: 2.8em;
 }
 h2 {
-  font-size: 2.441em;
+  font-size: 2.1em;
 }
 h3 {
-  font-size: 1.953em;
+  font-size: 1.5em;
 }
 h4 {
-  font-size: 1.563em;
+  font-size: 1.2em;
 }
 h5 {
-  font-size: 1.25em;
+  font-size: 1em;
 }
 strong,
 b {
@@ -80,9 +88,12 @@ b {
 }
 a {
   color: var(--accent);
+  text-decoration: underline;
+  transition: color var(--transition);
 }
-a:hover {
-  color: var(--accent);
+a:hover, a:focus {
+  color: var(--accent-dark);
+  text-decoration: underline wavy 1.5px;
 }
 p {
   margin-bottom: 1em;
@@ -103,16 +114,26 @@ table {
 img {
   max-width: 100%;
   height: auto;
-  border-radius: 8px;
+  border-radius: var(--radius);
+  box-shadow: 0 2px 12px rgba(var(--gray), 0.10);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+img:hover {
+  box-shadow: 0 8px 32px rgba(var(--accent), 0.10);
+  transform: scale(1.01);
 }
 code {
-  padding: 2px 5px;
+  padding: 2px 7px;
   background-color: rgb(var(--gray-light));
-  border-radius: 2px;
+  border-radius: 4px;
+  font-size: 0.95em;
 }
 pre {
   padding: 1.5em;
-  border-radius: 8px;
+  border-radius: var(--radius);
+  background: rgb(var(--gray-light));
+  font-size: 1em;
+  overflow-x: auto;
 }
 pre > code {
   all: unset;
@@ -120,20 +141,59 @@ pre > code {
 blockquote {
   border-left: 4px solid var(--accent);
   padding: 0 0 0 20px;
-  margin: 0px;
-  font-size: 1.333em;
+  margin: 1.5em 0;
+  font-size: 1.15em;
+  background: rgba(var(--gray-light), 0.5);
+  border-radius: 0 var(--radius) var(--radius) 0;
 }
 hr {
   border: none;
   border-top: 1px solid rgb(var(--gray-light));
 }
-@media (max-width: 720px) {
+@media (max-width: 900px) {
   body {
     font-size: 18px;
   }
   main {
-    padding: 1em;
+    padding: 1.2em 0.5em;
+    width: 100%;
   }
+  .prose {
+    width: 100%;
+    padding: 0.5em;
+  }
+}
+
+/* Blog card styles */
+.blog-card {
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: var(--box-shadow);
+  padding: 2em 1.5em;
+  margin-bottom: 2em;
+  transition: box-shadow var(--transition), transform var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+.blog-card:hover {
+  box-shadow: 0 8px 32px rgba(var(--accent), 0.10);
+  transform: translateY(-2px) scale(1.01);
+}
+.blog-card img {
+  border-radius: var(--radius);
+  box-shadow: none;
+  margin-bottom: 1em;
+}
+.blog-card-title {
+  font-size: 1.5em;
+  margin: 0 0 0.3em 0;
+  color: rgb(var(--black));
+}
+.blog-card-meta {
+  color: rgb(var(--gray));
+  font-size: 0.95em;
+  margin-bottom: 0.5em;
 }
 
 .sr-only {

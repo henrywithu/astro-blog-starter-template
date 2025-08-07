@@ -15,95 +15,111 @@ const posts = (await getCollection('blog')).sort(
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-			main {
-				width: 960px;
-			}
-			ul {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 2rem;
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-			ul li {
-				width: calc(50% - 1rem);
-			}
-			ul li * {
-				text-decoration: none;
-				transition: 0.2s ease;
-			}
-			ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
-				text-align: center;
-			}
-			ul li:first-child img {
-				width: 100%;
-			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
-			}
-			ul li img {
-				margin-bottom: 0.5rem;
-				border-radius: 12px;
-			}
-			ul li a {
-				display: block;
-			}
-			.title {
-				margin: 0;
-				color: rgb(var(--black));
-				line-height: 1;
-			}
-			.date {
-				margin: 0;
-				color: rgb(var(--gray));
-			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
-			}
-			ul a:hover img {
-				box-shadow: var(--box-shadow);
-			}
-			@media (max-width: 720px) {
-				ul {
-					gap: 0.5em;
-				}
-				ul li {
-					width: 100%;
-					text-align: center;
-				}
-				ul li:first-child {
-					margin-bottom: 0;
-				}
-				ul li:first-child .title {
-					font-size: 1.563em;
-				}
-			}
-		</style>
+<style>
+  main {
+	width: 100%;
+	max-width: 1080px;
+	margin: 0 auto;
+	padding: 2em 0.5em;
+  }
+  .blog-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2.5em;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	justify-content: center;
+  }
+  .blog-list li {
+	width: 100%;
+	max-width: 480px;
+	display: flex;
+  }
+  .blog-card {
+	width: 100%;
+	background: #fff;
+	border-radius: var(--radius);
+	box-shadow: var(--box-shadow);
+	padding: 1.5em 1.2em;
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+	transition: box-shadow var(--transition), transform var(--transition);
+	text-align: left;
+	min-height: 320px;
+  }
+  .blog-card:hover {
+	box-shadow: 0 8px 32px rgba(var(--accent), 0.10);
+	transform: translateY(-2px) scale(1.01);
+  }
+  .blog-card img {
+	border-radius: var(--radius);
+	margin-bottom: 1em;
+	width: 100%;
+	height: auto;
+	box-shadow: none;
+	transition: box-shadow var(--transition), transform var(--transition);
+  }
+  .blog-card-title {
+	font-size: 1.35em;
+	margin: 0 0 0.2em 0;
+	color: rgb(var(--black));
+	font-weight: 700;
+	line-height: 1.2;
+	letter-spacing: -0.01em;
+  }
+  .blog-card-meta {
+	color: rgb(var(--gray));
+	font-size: 0.98em;
+	margin-bottom: 0.5em;
+  }
+  .blog-card-link {
+	text-decoration: none;
+	color: inherit;
+	display: block;
+	transition: color var(--transition);
+  }
+  .blog-card-link:hover .blog-card-title {
+	color: var(--accent);
+  }
+  @media (max-width: 900px) {
+	.blog-list {
+	  gap: 1.2em;
+	}
+	.blog-list li {
+	  max-width: 100%;
+	}
+	.blog-card {
+	  padding: 1em 0.5em;
+	  min-height: 220px;
+	}
+  }
+</style>
 	</head>
 	<body>
 		<Header />
 		<main>
 			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.id}/`}>
-									<img width={720} height={360} src={post.data.heroImage} alt="" />
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
-								</a>
-							</li>
-						))
-					}
-				</ul>
+<ul class="blog-list">
+  {
+	posts.map((post) => (
+	  <li>
+		<a class="blog-card-link" href={`/blog/${post.id}/`}>
+		  <div class="blog-card">
+			{post.data.heroImage && (
+			  <img width={720} height={360} src={post.data.heroImage} alt="" />
+			)}
+			<div class="blog-card-meta">
+			  <FormattedDate date={post.data.pubDate} />
+			</div>
+			<div class="blog-card-title">{post.data.title}</div>
+		  </div>
+		</a>
+	  </li>
+	))
+  }
+</ul>
 			</section>
 		</main>
 		<Footer />

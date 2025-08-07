@@ -11,75 +11,108 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 ---
 
 <html lang="en">
-	<head>
-		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-		</style>
-	</head>
+  <head>
+	<BaseHead title={title} description={description} />
+	<style>
+	  main {
+		width: 100%;
+		max-width: 900px;
+		margin: 0 auto;
+		padding: 2.5em 0.5em 2em 0.5em;
+	  }
+	  .blog-article-card {
+		background: #fff;
+		border-radius: var(--radius);
+		box-shadow: var(--box-shadow);
+		padding: 2.5em 2em 2em 2em;
+		margin: 0 auto 2em auto;
+		max-width: 800px;
+		display: flex;
+		flex-direction: column;
+		gap: 1.5em;
+	  }
+	  .hero-image {
+		width: 100%;
+		margin-bottom: 1.5em;
+	  }
+	  .hero-image img {
+		display: block;
+		margin: 0 auto;
+		border-radius: var(--radius);
+		box-shadow: 0 2px 12px rgba(var(--gray), 0.10);
+		max-height: 420px;
+		object-fit: cover;
+		width: 100%;
+	  }
+	  .prose {
+		width: 100%;
+		max-width: 720px;
+		margin: auto;
+		padding: 0;
+		color: rgb(var(--gray-dark));
+	  }
+	  .title {
+		margin-bottom: 1.2em;
+		padding: 0.5em 0 0.7em 0;
+		text-align: center;
+		line-height: 1.1;
+	  }
+	  .title h1 {
+		margin: 0 0 0.3em 0;
+		font-size: 2.2em;
+		font-weight: 800;
+		letter-spacing: -0.01em;
+	  }
+	  .date {
+		margin-bottom: 0.2em;
+		color: rgb(var(--gray));
+		font-size: 1em;
+	  }
+	  .last-updated-on {
+		font-style: italic;
+		color: rgb(var(--gray));
+		font-size: 0.98em;
+	  }
+	  @media (max-width: 900px) {
+		main {
+		  padding: 1.2em 0.2em;
+		}
+		.blog-article-card {
+		  padding: 1.2em 0.5em 1em 0.5em;
+		}
+		.prose {
+		  padding: 0;
+		}
+	  }
+	</style>
+  </head>
 
-	<body>
-		<Header />
-		<main>
-			<article>
-				<div class="hero-image">
-					{heroImage && <img width={1020} height={510} src={heroImage} alt="" />}
+  <body>
+	<Header />
+	<main>
+	  <article class="blog-article-card">
+		{heroImage && (
+		  <div class="hero-image">
+			<img width={1020} height={510} src={heroImage} alt="" />
+		  </div>
+		)}
+		<div class="prose">
+		  <div class="title">
+			<div class="date">
+			  <FormattedDate date={pubDate} />
+			  {updatedDate && (
+				<div class="last-updated-on">
+				  Last updated on <FormattedDate date={updatedDate} />
 				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
-						<h1>{title}</h1>
-						<hr />
-					</div>
-					<slot />
-				</div>
-			</article>
-		</main>
-		<Footer />
-	</body>
+			  )}
+			</div>
+			<h1>{title}</h1>
+			<hr />
+		  </div>
+		  <slot />
+		</div>
+	  </article>
+	</main>
+	<Footer />
+  </body>
 </html>

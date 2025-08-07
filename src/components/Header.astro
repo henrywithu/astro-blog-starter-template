@@ -11,47 +11,72 @@ import { SITE_TITLE } from '../consts';
 		   <HeaderLink href="/blog">Blog</HeaderLink>
 		   <HeaderLink href="/about">About</HeaderLink>
 	   </div>
-	   <!-- Personal blog: add your own social/profile links here if desired -->
+	   <!-- Add social/profile links here if desired -->
 	</nav>
 </header>
 <style>
+header {
+	position: sticky;
+	top: 0;
+	z-index: 100;
+	margin: 0;
+	padding: 0 1.5em;
+	background: #fff;
+	box-shadow: 0 2px 12px rgba(var(--gray), 0.07);
+	border-bottom: 1px solid rgba(var(--gray-light), 0.7);
+	transition: box-shadow var(--transition);
+}
+h2 {
+	margin: 0;
+	font-size: 1.2em;
+	letter-spacing: 0.01em;
+}
+h2 a,
+h2 a.active {
+	text-decoration: none;
+	color: var(--accent-dark);
+	font-weight: 700;
+	letter-spacing: 0.01em;
+}
+nav {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 2em;
+	min-height: 64px;
+}
+.internal-links {
+	display: flex;
+	gap: 0.5em;
+}
+nav a {
+	padding: 0.7em 1em;
+	color: rgb(var(--black));
+	border-bottom: 3px solid transparent;
+	border-radius: 6px 6px 0 0;
+	text-decoration: none;
+	font-weight: 500;
+	font-size: 1.05em;
+	transition: background var(--transition), color var(--transition), border-bottom var(--transition);
+}
+nav a:hover, nav a.active {
+	background: rgba(var(--accent), 0.07);
+	color: var(--accent);
+	border-bottom: 3px solid var(--accent);
+	text-decoration: none;
+}
+@media (max-width: 900px) {
 	header {
-		margin: 0;
-		padding: 0 1em;
-		background: white;
-		box-shadow: 0 2px 8px rgba(var(--black), 5%);
-	}
-	h2 {
-		margin: 0;
-		font-size: 1em;
-	}
-
-	h2 a,
-	h2 a.active {
-		text-decoration: none;
+		padding: 0 0.5em;
 	}
 	nav {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.5em;
+		min-height: unset;
 	}
-	nav a {
-		padding: 1em 0.5em;
-		color: var(--black);
-		border-bottom: 4px solid transparent;
-		text-decoration: none;
+	.internal-links {
+		gap: 0.2em;
 	}
-	nav a.active {
-		text-decoration: none;
-		border-bottom-color: var(--accent);
-	}
-	.social-links,
-	.social-links a {
-		display: flex;
-	}
-	@media (max-width: 720px) {
-		.social-links {
-			display: none;
-		}
-	}
+}
 </style>

@@ -3,37 +3,56 @@ const today = new Date();
 ---
 
 <footer>
-   <div class="footer-desc">
-	 <span>L.A.S.T. - Life & Art & Science & Technology</span>
-	 <br />
-	 <a href="https://henrywithu.com" target="_blank" rel="noopener">henrywithu.com</a> &copy; {today.getFullYear()} Henry. All rights reserved.
-   </div>
-   <div class="footer-links">
-	 <a href="/">Home</a> |
-	 <a href="/blog">Blog</a> |
-	 <a href="https://henrywithu.com/about/" target="_blank" rel="noopener">About</a> |
-	 <a href="https://henrywithu.com/tag/tech/" target="_blank" rel="noopener">Tech</a> |
-	 <a href="https://henrywithu.com/tag/lifestyle/" target="_blank" rel="noopener">Lifestyle</a>
-   </div>
+  <div class="footer-desc">
+	<span class="footer-title">L.A.S.T. — Life & Art & Science & Technology</span>
+	<br />
+	<a href="https://henrywithu.com" target="_blank" rel="noopener">henrywithu.com</a> &copy; {today.getFullYear()} Henry. All rights reserved.
+  </div>
+  <div class="footer-links">
+	<a href="/">Home</a>
+	<a href="/blog">Blog</a>
+	<a href="https://henrywithu.com/about/" target="_blank" rel="noopener">About</a>
+	<a href="https://henrywithu.com/tag/tech/" target="_blank" rel="noopener">Tech</a>
+	<a href="https://henrywithu.com/tag/lifestyle/" target="_blank" rel="noopener">Lifestyle</a>
+  </div>
 </footer>
 <style>
-	footer {
-		padding: 2em 1em 6em 1em;
-		background: linear-gradient(var(--gray-gradient)) no-repeat;
-		color: rgb(var(--gray));
-		text-align: center;
-	}
-	.social-links {
-		display: flex;
-		justify-content: center;
-		gap: 1em;
-		margin-top: 1em;
-	}
-	.social-links a {
-		text-decoration: none;
-		color: rgb(var(--gray));
-	}
-	.social-links a:hover {
-		color: rgb(var(--gray-dark));
-	}
+footer {
+  padding: 2.5em 1em 4em 1em;
+  background: linear-gradient(120deg, #f7faff 60%, #e9f0ff 100%);
+  color: rgb(var(--gray-dark));
+  text-align: center;
+  border-top: 1px solid rgba(var(--gray-light), 0.7);
+  font-size: 1.05em;
+}
+.footer-title {
+  font-weight: 700;
+  font-size: 1.1em;
+  letter-spacing: 0.01em;
+}
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.2em;
+  margin-top: 1.5em;
+  font-size: 1em;
+}
+.footer-links a {
+  text-decoration: none;
+  color: rgb(var(--gray));
+  padding: 0.2em 0.7em;
+  border-radius: 6px;
+  transition: background var(--transition), color var(--transition);
+}
+.footer-links a:hover {
+  color: var(--accent);
+  background: rgba(var(--accent), 0.07);
+}
+@media (max-width: 900px) {
+  .footer-links {
+	gap: 0.5em;
+	font-size: 0.98em;
+  }
+}
 </style>
