@@ -10,18 +10,81 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
-	<body>
-		<Header />
-	   <main>
-		   <h1>Welcome to Trapnest</h1>
-		   <p>
-			   Hi, I'm <strong>Henry</strong>! This is my personal blog where I share thoughts, stories, and projects. 
-			   You can also find me at <a href="https://henrywithu.com" target="_blank" rel="noopener">henrywithu.com</a>.
-		   </p>
-		   <p>
-			   Here you'll find posts about technology, life, and anything else that inspires me. Thanks for visiting!
-		   </p>
-		</main>
-		<Footer />
-	</body>
+<body style="margin:0; padding:0; overflow-x:hidden;">
+	<Header />
+	<div style="position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:-1; pointer-events:none;">
+	  <canvas id="ribbon-canvas" style="width:100vw; height:100vh; display:block;"></canvas>
+	</div>
+	<main>
+		<h1>Welcome to Trapnest</h1>
+		<p>
+			Hi, I'm <strong>Henry</strong>! This is my personal blog where I share thoughts, stories, and projects. 
+			You can also find me at <a href="https://henrywithu.com" target="_blank" rel="noopener">henrywithu.com</a>.
+		</p>
+		<p>
+			Here you'll find posts about technology, life, and anything else that inspires me. Thanks for visiting!
+		</p>
+	</main>
+	<Footer />
+	<script>
+	// Fluttering Ribbon Effect
+	const canvas = document.getElementById('ribbon-canvas');
+	const ctx = canvas.getContext('2d');
+	let dpr = window.devicePixelRatio || 1;
+	function resize() {
+	  canvas.width = window.innerWidth * dpr;
+	  canvas.height = window.innerHeight * dpr;
+	  canvas.style.width = window.innerWidth + 'px';
+	  canvas.style.height = window.innerHeight + 'px';
+	}
+	resize();
+	window.addEventListener('resize', resize);
+
+	// Ribbon parameters
+	const ribbonLength = 120;
+	const ribbonWidth = 32 * dpr;
+	const points = [];
+	const baseY = canvas.height / 2;
+	for (let i = 0; i < ribbonLength; i++) {
+	  points.push({
+		x: (canvas.width / (ribbonLength - 1)) * i,
+		y: baseY + Math.sin(i / 5) * 20 * dpr,
+		vy: 0
+	  });
+	}
+
+	function animateRibbon() {
+	  ctx.clearRect(0, 0, canvas.width, canvas.height);
+	  ctx.save();
+	  ctx.globalAlpha = 0.7;
+	  ctx.beginPath();
+	  for (let i = 0; i < points.length; i++) {
+		let p = points[i];
+		let wave = Math.sin(Date.now() / 900 + i / 3) * 18 * dpr;
+		let y = baseY + wave;
+		// Spring effect
+		p.vy += (y - p.y) * 0.08;
+		p.vy *= 0.85;
+		p.y += p.vy;
+		if (i === 0) {
+		  ctx.moveTo(p.x, p.y);
+		} else {
+		  ctx.lineTo(p.x, p.y);
+		}
+	  }
+	  ctx.lineWidth = ribbonWidth;
+	  // Gradient color
+	  const grad = ctx.createLinearGradient(0, baseY - 100 * dpr, canvas.width, baseY + 100 * dpr);
+	  grad.addColorStop(0, '#f7b42c');
+	  grad.addColorStop(0.5, '#fc575e');
+	  grad.addColorStop(1, '#53a0fd');
+	  ctx.strokeStyle = grad;
+	  ctx.lineCap = 'round';
+	  ctx.stroke();
+	  ctx.restore();
+	  requestAnimationFrame(animateRibbon);
+	}
+	animateRibbon();
+	</script>
+</body>
 </html>
